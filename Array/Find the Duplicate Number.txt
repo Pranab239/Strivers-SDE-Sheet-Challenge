@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        //tortoise method. two pointer approach.
+        int slow = nums[0];
+        int fast = nums[0];
+        do {
+            //slow ptr moves one place at a time.
+            slow = nums[slow];
+            //fast ptr moves two place at a time.
+            fast = nums[nums[fast]];
+        } while(slow != fast);
+        fast = nums[0];
+        //linear increment starts. wherever collide that is the repeating element.
+        while(slow != fast) {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
+    }
+};
