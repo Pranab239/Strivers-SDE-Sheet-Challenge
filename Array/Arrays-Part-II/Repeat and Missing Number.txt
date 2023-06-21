@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+
+pair<int,int> missingAndRepeating(vector<int> &arr, int n)
+{
+    int size = arr.size();
+	long long sum = (n * (n+1)) / 2;
+	long long sqSum = (n * (n + 1) * (2*n + 1)) / 6;
+	long long arrSum = 0;
+	long long arrSqSum = 0;
+	for(int i = 0 ; i < size ; i++) {
+		arrSum += arr[i];
+		arrSqSum += ((long long)arr[i] * (long long)arr[i]);
+	}
+	long long val1 = sum - arrSum;			// X = X - Y = 4 ----------(1)
+	long long val2 = sqSum - arrSqSum;		// X = X^2 - Y^2 ------------(2)
+	// (X+Y)(X-Y) = 24
+	// From (1)	(X+Y) = 6.
+	val2 = val2 / val1;	// X+Y
+	long long repNo = (val2 + val1) / 2;
+	long long misNo = repNo - val1;
+	return {(int)repNo, (int)misNo};
+}
+
