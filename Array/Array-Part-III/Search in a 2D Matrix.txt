@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int row = matrix.size();
+        int col = matrix[0].size();
+        int low = 0;
+        int high = (row * col) - 1;
+        while(low <= high) {
+            int mid = (low + high) / 2;
+            //element at mid position is the target value.
+            if(matrix[mid / col][mid % col] == target) return true;
+            //element at mid is lesser hence target is in the right half of array.
+            else if(matrix[mid / col][mid % col] < target) low = mid + 1;
+            //element at mid is greater hence target is in the left half of array.
+            else high = mid - 1;
+        }
+        return false;
+    }
+};
